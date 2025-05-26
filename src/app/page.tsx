@@ -57,8 +57,15 @@ export default function Home() {
   const [card, setCard] = useState<Acne[]>([]);
   useEffect(() => {
     const fetchData = async () => {
-      setCard(mockData);
+      try {
+        const response = await fetch("/api/history");
+        const data = await response.json();
+        setCard(data);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
     };
+
     fetchData();
   }, []);
 
@@ -96,44 +103,10 @@ export default function Home() {
         <div className="text-xl font-bold pb-5">History</div>
         <div className="flex flex-col">
           {card.map((acne) => (
-            <Card key={acne.id} acne={acne} />
+            <Card key={acne.user_id} acne={acne} />
           ))}
         </div>
       </div>
     </div>
   );
 }
-
-
-const mockData = [
-  {
-    id: '1',
-    acne_type: "pustule",
-    image_url: "https://picsum.photos/200",
-    created_at: "2023-10-01T12:00:00Z",
-  },
-  {
-    id: '2',
-    acne_type: "pustule",
-    image_url: "https://picsum.photos/200",
-    created_at: "2023-10-02T12:00:00Z",
-  },
-  {
-    id: '3',
-    acne_type: "pustule",
-    image_url: "https://picsum.photos/200",
-    created_at: "2023-10-03T12:00:00Z",
-  },
-  {
-    id: '4',
-    acne_type: "pustule",
-    image_url: "https://picsum.photos/200",
-    created_at: "2023-10-04T12:00:00Z",
-  },
-  {
-    id: '5',
-    acne_type: "pustule",
-    image_url: "https://picsum.photos/200",
-    created_at: "2023-10-05T12:00:00Z",
-  },
-]
