@@ -2,7 +2,7 @@ import { useState } from 'react';
 import Image from 'next/image';
 
 export interface Acne {
-    user_id: string;
+    _id: string;
     description: string;
     image: string;
     date: string;

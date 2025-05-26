@@ -103,7 +103,7 @@ export default function Home() {
         <div className="text-xl font-bold pb-5">History</div>
         <div className="flex flex-col">
           {card.map((acne) => (
-            <Card key={acne.user_id} acne={acne} />
+            <Card key={acne._id} acne={acne} />
           ))}
         </div>
       </div>
